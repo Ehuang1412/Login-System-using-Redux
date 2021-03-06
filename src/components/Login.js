@@ -1,4 +1,7 @@
 import React, {useState} from "react";
+import {useDispatch} from "react-redux";
+import { login } from "../features/userSlice";
+
 
 
  
@@ -7,9 +10,25 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const dispatch = useDispatch();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    //input data to reducer or slice
+    dispatch(
+      login({
+        name:name,
+        email: email,
+        password: password,
+        loggedIn: true,
+    })
+    );
+  }
+
   return (
     <div className="login">
-      <form className="login__form">
+      <form className="login__form" onSubmit={(e)=>handleSubmit(e)}>
         <h1> Login Here </h1>
         <input 
         type="name" 
